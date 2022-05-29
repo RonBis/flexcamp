@@ -1,5 +1,11 @@
+import Header from '../../ui/Header'
+
 function DonatePage() {
-  return <div>DonatePage</div>
+  return (
+    <div>
+      Donate Page
+    </div>
+  )
 }
 
 export default DonatePage

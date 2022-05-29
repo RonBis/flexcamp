@@ -2,6 +2,7 @@ import { ChevronDownIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { sanityClient } from '../lib/sanity'
+import Footer from '../ui/Footer'
 import Header from '../ui/Header'
 import FeaturedSection from '../ui/homepage/FeaturedSection'
 import LatestSection from '../ui/homepage/LatestSection'
@@ -33,6 +34,8 @@ const Home = ({ featuredPosts }: props) => {
         <FeaturedSection postPairsProp={featuredPosts} />
         <LatestSection />
       </section>
+
+      <Footer />
 
       <ModalRoot />
     </div>
