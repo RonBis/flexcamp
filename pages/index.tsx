@@ -7,6 +7,7 @@ import Header from '../ui/Header'
 import FeaturedSection from '../ui/homepage/FeaturedSection'
 import LatestSection from '../ui/homepage/LatestSection'
 import ModalRoot from '../ui/ModalRoot'
+import PageLayout from '../ui/PageLayout'
 
 interface props {
   featuredPosts: PostPair[]
@@ -15,14 +16,7 @@ interface props {
 
 const Home = ({ featuredPosts, latestPosts }: props) => {
   return (
-    <div className="font-jost flex min-h-screen flex-col bg-gray-900 text-white">
-      <Head>
-        <title>flexcamp</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <Header />
-
+    <PageLayout pageTitle="flexcamp">
       <section className="flex flex-col items-center px-8">
         {/** Greet text */}
         <div className="flex flex-col items-center py-10 px-4">
@@ -35,11 +29,7 @@ const Home = ({ featuredPosts, latestPosts }: props) => {
         <FeaturedSection postPairsProp={featuredPosts} />
         <LatestSection latestPosts={latestPosts} />
       </section>
-
-      <Footer />
-
-      <ModalRoot />
-    </div>
+    </PageLayout>
   )
 }
 

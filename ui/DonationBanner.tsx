@@ -16,7 +16,7 @@ function Donation() {
               router.push('/donate')
             }}
           >
-            Loveing flexcamp ? Donate
+            Loving flexcamp ? Donate
           </p>
 
           <XCircleIcon
