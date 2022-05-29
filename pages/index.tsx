@@ -10,9 +10,10 @@ import ModalRoot from '../ui/ModalRoot'
 
 interface props {
   featuredPosts: PostPair[]
+  latestPosts: Post[]
 }
 
-const Home = ({ featuredPosts }: props) => {
+const Home = ({ featuredPosts, latestPosts }: props) => {
   return (
     <div className="font-jost flex min-h-screen flex-col bg-gray-900 text-white">
       <Head>
@@ -32,7 +33,7 @@ const Home = ({ featuredPosts }: props) => {
         </div>
 
         <FeaturedSection postPairsProp={featuredPosts} />
-        <LatestSection />
+        <LatestSection latestPosts={latestPosts} />
       </section>
 
       <Footer />
@@ -45,35 +46,27 @@ const Home = ({ featuredPosts }: props) => {
 export default Home
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = await sanityClient.fetch(
-    // groq
-    `*[_type == "post"]{
-      _id,
-      _createdAt,
-      title,
-      slug,
-      author -> {
-        name
-      },
-      description,
-      mainImage,
-    }`
+  const featuredPosts = await sanityClient.fetch(
+    `*[_type == "post" && isFeatured]{ _createdAt, title, slug, author -> { name }, description, mainImage }`
+  )
+  const latestPosts = await sanityClient.fetch(
+    `*[_type == "post"]{ _id, _createdAt, title, slug, author -> { name }, description, mainImage }`
   )
 
   let _postPairs = []
-
-  for (let i = 0; i < posts.length; i += 2) {
+  for (let i = 0; i < featuredPosts.length; i += 2) {
     _postPairs.push({
       index: i / 2,
-      post1: posts[i],
-      post2: posts[i + 1] ?? null, // important because undefined cannot be serialised as JSON
+      post1: featuredPosts[i],
+      post2: featuredPosts[i + 1] ?? null, // important because undefined cannot be serialised as JSON
     })
   }
 
   return {
     props: {
       featuredPosts: _postPairs,
+      latestPosts: latestPosts,
     },
-    revalidate: 3600 * 24 // Incremental Static Regeneration
+    revalidate: 3600 * 12, // Incremental Static Regeneration
   }
 }

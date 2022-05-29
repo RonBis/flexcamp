@@ -1,4 +1,4 @@
-import { DocumentIcon } from "@sanity/icons"
+import { DocumentIcon } from '@sanity/icons'
 
 export default {
   name: 'post',
@@ -25,14 +25,14 @@ export default {
       title: 'Description',
       type: 'string',
       options: {
-        maxLength: 250
+        maxLength: 250,
       },
     },
     {
       name: 'author',
       title: 'Author',
       type: 'reference',
-      to: {type: 'author'},
+      to: { type: 'author' },
     },
     {
       name: 'mainImage',
@@ -52,6 +52,12 @@ export default {
       title: 'Body',
       type: 'blockContent',
     },
+    {
+      name: 'isFeatured',
+      title: 'IsFeatured',
+      type: 'boolean',
+      description: 'If true, it will be shown in Featured section',
+    },
   ],
 
   preview: {
@@ -61,7 +67,7 @@ export default {
       media: 'mainImage',
     },
     prepare(selection) {
-      const {author} = selection
+      const { author } = selection
       return Object.assign({}, selection, {
         subtitle: author && `by ${author}`,
       })

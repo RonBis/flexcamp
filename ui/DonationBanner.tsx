@@ -9,21 +9,18 @@ function Donation() {
   return (
     <>
       {show && (
-        <div
-          className="bgColorSecondary fgTextSecondary relative flex h-9 cursor-pointer items-center justify-center"
-          onClick={() => {
-            router.push('/donate')
-          }}
-        >
+        <div className="bgColorSecondary fgTextSecondary relative flex h-9 items-center justify-center">
           <p
-            className=" text-center text-xs font-bold uppercase text-gray-900"
-            onClick={() => {}}
+            className=" cursor-pointer text-center text-xs font-bold uppercase text-gray-900 "
+            onClick={() => {
+              router.push('/donate')
+            }}
           >
-            Love flexcamp ? Donate
+            Loveing flexcamp ? Donate
           </p>
 
           <XCircleIcon
-            className="absolute right-3 h-5 text-gray-800"
+            className="absolute right-3 h-5 cursor-pointer text-gray-800"
             onClick={() => setShow(false)}
           />
         </div>

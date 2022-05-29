@@ -1,12 +1,18 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { urlForImage } from '../../lib/sanity'
 import { toStandardDate } from '../../lib/util/date'
 
 function FeaturedSection({ postPairsProp }: { postPairsProp: PostPair[] }) {
   const [postPairs, _] = useState(postPairsProp)
-  const [currentPostPair, setCurrentPostPair] = useState(postPairsProp[0])
+  const [currentPostPair, setCurrentPostPair] = useState<PostPair | null>(null)
+
+  useEffect(() => {
+    if (postPairsProp.length !== 0) {
+      setCurrentPostPair(postPairsProp[0])
+    }
+  })
 
   const showNextCardPair = () => {
     if (currentPostPair?.index! < postPairs.length - 1) {
@@ -25,6 +31,8 @@ function FeaturedSection({ postPairsProp }: { postPairsProp: PostPair[] }) {
   return (
     <section className="mb-20 flex flex-col items-center">
       <header className="mb-10 font-medium uppercase">featured</header>
+
+      {postPairs.length === 0 && <p>Uh Oh, no content right now :(</p>}
 
       {currentPostPair && (
         <>
@@ -60,9 +68,9 @@ function FeaturedSection({ postPairsProp }: { postPairsProp: PostPair[] }) {
                   <p className="text-sm">{currentPostPair.post2.description}</p>
                   <p className="text-center text-sm">
                     <span className="font-bold text-yellow-400">
-                      {currentPostPair.post1.author.name}
+                      {currentPostPair.post2.author.name}
                     </span>{' '}
-                    at {toStandardDate(currentPostPair.post1._createdAt)}
+                    at {toStandardDate(currentPostPair.post2._createdAt)}
                   </p>
                 </div>
               </Link>
