@@ -10,9 +10,9 @@ function LatestSection({ latestPosts }: { latestPosts: Post[] | null }) {
       {!latestPosts && <p>Uh Oh, no content right now :(</p>}
 
       {latestPosts && (
-        <div className="grid max-w-2xl grid-cols-1 lg:grid-cols-2 gap-10">
+        <div className="grid max-w-2xl grid-cols-1 gap-10 lg:grid-cols-2">
           {latestPosts.map((post) => (
-            <Link href={`/post/${post.slug.current}`}>
+            <Link href={`/post/${post.slug.current}`} id={post._id}>
               <div className="flex skew-y-3 flex-col space-y-3 transition-all ease-in hover:skew-y-0 hover:scale-105">
                 <img
                   className="rounded-xl"

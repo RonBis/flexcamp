@@ -1,35 +1,42 @@
-import { toHTML } from '@portabletext/to-html'
+import { PortableText } from '@portabletext/react'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import Image from 'next/image'
 import { sanityClient, urlForImage } from '../../lib/sanity'
 import { toStandardDate } from '../../lib/util/date'
+import LatestSection from '../../ui/homepage/LatestSection'
 import PageLayout from '../../ui/PageLayout'
 
-function Post({ post }: { post: Post }) {
+function Post({ post, latestPosts }: { post: Post; latestPosts: Post[] }) {
   return (
     <PageLayout pageTitle={`${post.title} - flexcamp`}>
       <section className="flex flex-col items-center p-10">
         {/** post title */}
-        <p className="text-xl mb-5">{post.title}</p>
+        <p className="mb-5 text-2xl">{post.title}</p>
 
         {/** author section */}
-        <div className='mb-8 items-center flex flex-col'>
+        <div className="mb-8 flex flex-col items-center">
           <p className="flex items-center">
-            Posted by
-            <img
+            Posted by&nbsp;
+            <Image
               src={urlForImage(post.author.image).url()}
-              className="mx-2 h-8 rounded-full"
+              height={32}
+              width={32}
+              className="rounded-full"
             />
+            &nbsp;
             <span className="text-yellow-500">{post.author.name}</span>
           </p>
-          <p className='text-sm'>on {toStandardDate(post._createdAt)}</p>
+          <p className="text-sm">on {toStandardDate(post._createdAt)}</p>
         </div>
 
         {/** content section */}
         <div>
-          {toHTML(post.body as any, {})}
+          <PortableText value={post.body as any} />
         </div>
 
-        <hr className='mt-6 w-24' />
+        <hr className="mt-6 mb-16 w-24" />
+
+        <LatestSection latestPosts={latestPosts} />
       </section>
     </PageLayout>
   )
@@ -59,15 +66,26 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     { slug: params?.slug }
   )
 
-  if (!post) {
+  // match for post body
+  // if post body is blank(undefined)
+  // then we should conclude that the post doesn't exist
+  if (post.body === undefined) {
     return {
-      notFound: true,
+      redirect: {
+        destination: '/post/error',
+        permanent: false,
+      },
     }
   }
+
+  const latestPosts = await sanityClient.fetch(
+    `*[_type == "post"]{ _id, _createdAt, title, slug, author -> { name }, description, mainImage }`
+  )
 
   return {
     props: {
       post,
+      latestPosts: latestPosts,
     },
     revalidate: 3600 * 12, // ISR
   }

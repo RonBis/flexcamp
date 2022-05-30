@@ -1,12 +1,8 @@
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { GetStaticProps } from 'next'
-import Head from 'next/head'
 import { sanityClient } from '../lib/sanity'
-import Footer from '../ui/Footer'
-import Header from '../ui/Header'
 import FeaturedSection from '../ui/homepage/FeaturedSection'
 import LatestSection from '../ui/homepage/LatestSection'
-import ModalRoot from '../ui/ModalRoot'
 import PageLayout from '../ui/PageLayout'
 
 interface props {
