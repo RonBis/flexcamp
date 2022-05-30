@@ -26,7 +26,12 @@ function AppDrawerModal() {
       modalContent={
         <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-black p-6 text-left align-middle text-gray-400 shadow-xl transition-all">
           <Dialog.Title as="span">
-            <Image src="/logo-text.svg" height="24" width="152.34" />
+            <Image
+              src="/img/logo-text.svg"
+              height="24"
+              width="152.34"
+              alt="flexcamp logo"
+            />
           </Dialog.Title>
 
           <section className="font-jost mt-10 flex flex-col items-center space-y-4">

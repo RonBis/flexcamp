@@ -18,7 +18,8 @@ function Header() {
         />
         <Image
           className="cursor-pointer"
-          src="/logo-text.svg"
+          src="/img/logo-text.svg"
+          alt='flexcamp logo'
           height="24"
           width="152.34"
           onClick={() => router.push('/')}

@@ -43,6 +43,7 @@ function FeaturedSection({ postPairsProp }: { postPairsProp: PostPair[] }) {
                 <img
                   className="rounded-xl"
                   src={urlForImage(currentPostPair.post1.mainImage).url()}
+                  alt="Main image for the post"
                 />
                 <p className="text-lg">{currentPostPair.post1.title}</p>
                 <p className="text-sm">{currentPostPair.post1.description}</p>
@@ -61,6 +62,7 @@ function FeaturedSection({ postPairsProp }: { postPairsProp: PostPair[] }) {
                   <img
                     className="rounded-xl"
                     src={urlForImage(currentPostPair.post2.mainImage).url()}
+                    alt="Main image for the post"
                   />
                   <p className="text-lg">{currentPostPair.post2.title}</p>
                   <p className="text-sm">{currentPostPair.post2.description}</p>

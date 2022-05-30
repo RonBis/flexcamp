@@ -17,6 +17,7 @@ function Post({ post, latestPosts }: { post: Post; latestPosts: Post[] }) {
         <img
           src={urlForImage(post.mainImage).url()}
           className="mb-6 rounded-xl"
+          alt="Post main image"
         />
 
         {/** author section */}
@@ -25,6 +26,7 @@ function Post({ post, latestPosts }: { post: Post; latestPosts: Post[] }) {
             Posted by&nbsp;
             <Image
               src={urlForImage(post.author.image).url()}
+              alt="Authors's image"
               height={32}
               width={32}
               className="rounded-full"
