@@ -14,7 +14,10 @@ function Post({ post, latestPosts }: { post: Post; latestPosts: Post[] }) {
         <p className="mb-5 text-2xl">{post.title}</p>
 
         {/** main image */}
-        <img src={urlForImage(post.mainImage).url()} className='rounded-xl mb-6' />
+        <img
+          src={urlForImage(post.mainImage).url()}
+          className="mb-6 rounded-xl"
+        />
 
         {/** author section */}
         <div className="mb-8 flex flex-col items-center">
@@ -33,7 +36,7 @@ function Post({ post, latestPosts }: { post: Post; latestPosts: Post[] }) {
         </div>
 
         {/** content section */}
-        <div className='max-w-3xl'>
+        <div className="max-w-3xl">
           <PortableText value={post.body as any} />
         </div>
 
@@ -82,7 +85,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   const latestPosts = await sanityClient.fetch(
-    `*[_type == "post"]{ _id, _createdAt, title, slug, author -> { name }, description, mainImage }`
+    `*[_type == "post" && slug.current != $slug]{ _id, _createdAt, title, slug, author -> { name }, description, mainImage }`,
+    { slug: params?.slug }
   )
 
   return {
