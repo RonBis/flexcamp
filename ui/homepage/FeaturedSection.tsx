@@ -42,9 +42,7 @@ function FeaturedSection({ postPairsProp }: { postPairsProp: PostPair[] }) {
               <div className="flex skew-y-3 flex-col space-y-3 transition-all ease-in hover:skew-y-0">
                 <img
                   className="rounded-xl"
-                  src={urlForImage(
-                    (currentPostPair.post1 as any).mainImage
-                  ).url()}
+                  src={urlForImage(currentPostPair.post1.mainImage).url()}
                 />
                 <p className="text-lg">{currentPostPair.post1.title}</p>
                 <p className="text-sm">{currentPostPair.post1.description}</p>

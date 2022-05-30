@@ -13,6 +13,9 @@ function Post({ post, latestPosts }: { post: Post; latestPosts: Post[] }) {
         {/** post title */}
         <p className="mb-5 text-2xl">{post.title}</p>
 
+        {/** main image */}
+        <img src={urlForImage(post.mainImage).url()} className='rounded-xl mb-6' />
+
         {/** author section */}
         <div className="mb-8 flex flex-col items-center">
           <p className="flex items-center">
@@ -30,7 +33,7 @@ function Post({ post, latestPosts }: { post: Post; latestPosts: Post[] }) {
         </div>
 
         {/** content section */}
-        <div>
+        <div className='max-w-3xl'>
           <PortableText value={post.body as any} />
         </div>
 
