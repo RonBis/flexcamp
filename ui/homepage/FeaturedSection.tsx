@@ -58,7 +58,7 @@ function FeaturedSection({ postPairsProp }: { postPairsProp: PostPair[] }) {
 
             {currentPostPair.post2 && (
               <Link href={`/post/${currentPostPair.post2.slug.current}`}>
-                <div className="flex skew-y-3 flex-col space-y-3 transition-all ease-in hover:skew-y-0 hover:scale-105">
+                <div className="flex skew-z-3 flex-col space-y-3 transition-all ease-in hover:skew-y-0 hover:scale-105">
                   <img
                     className="rounded-xl"
                     src={urlForImage(currentPostPair.post2.mainImage).url()}
